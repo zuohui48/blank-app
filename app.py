@@ -42,7 +42,7 @@ def main():
         # Extract the stock symbol and name
 
         # Make the request to the Flask API
-        response = requests.post(f"http://127.0.0.1:5000/api/esg?stock={selection}")
+        response = requests.get(f"http://127.0.0.1:5000/api/esg?stock={selection}")
 
         if response.status_code == 200:
             data = response.json()
