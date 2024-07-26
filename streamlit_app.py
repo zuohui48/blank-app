@@ -4,10 +4,7 @@ import os
 from dotenv import load_dotenv
 import json
 
-st.title("🎈 My new app")
-st.write(
-    "test."
-)
+st.title("♻️ ESG scorer application")
 
 
 load_dotenv()
@@ -21,7 +18,7 @@ session = boto3.Session(
 
 bedrock_client = session.client('bedrock-runtime')
 
-#st.write(bedrock_client)
+st.write(bedrock_client)
 
 # Sample data
 options = ["CRWD", "AAPL", "TSLA", "BTC/USD", "ABBV", "NFLX", "NVDA", "AVGO"]
@@ -32,7 +29,29 @@ selection = st.selectbox("Select an option:", options, placeholder="Select an op
 # Display selected option
 st.write(f"You selected: {selection}")
 
+total_esg_score = 77.121
+environment_risk_score = 20.321
+governance_risk_score = 25.678
+social_risk_score = 31.122
 
+st.write(f"ESG scores for {selection}")
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric("Total ESG Risk Score", total_esg_score)
+
+with col2:
+    st.metric("Environment Risk Score", environment_risk_score)
+
+with col3:
+    st.metric("Governance Risk Score", governance_risk_score)
+
+with col4:
+    st.metric("Social Risk Score", social_risk_score)
+st.write("\n")
+st.title("📰 Upload article")
+article_url = st.text_input("Enter article URL:")
 def llm_invoke(body_dict):
     # Convert the dictionary to a JSON string
     body_json = json.dumps(body_dict)
