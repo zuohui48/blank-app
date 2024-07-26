@@ -4,11 +4,7 @@ import os
 from dotenv import load_dotenv
 import json
 
-st.title("🎈 My new app")
-st.write(
-    "test."
-)
-
+st.title("Aquila BEESGA 😎😎😎🦅🦅")
 
 load_dotenv()
 
@@ -23,11 +19,17 @@ bedrock_client = session.client('bedrock-runtime')
 
 #st.write(bedrock_client)
 
-# Sample data
-options = ["CRWD", "AAPL", "TSLA", "BTC/USD", "ABBV", "NFLX", "NVDA", "AVGO"]
+with open('Nomura_stocks.json', 'r') as file:
+    stock_data = json.load(file)
 
-# Show selectbox with filtered options
-selection = st.selectbox("Select an option:", options, placeholder="Select an option:", index=None)
+options = [f"{symbol}: {name}" for symbol, name in stock_data.items()]
+
+selection = st.selectbox(
+    "Select an option: ",
+    options,
+    placeholder="Select an option:",
+    index=None
+)
 
 # Display selected option
 st.write(f"You selected: {selection}")
